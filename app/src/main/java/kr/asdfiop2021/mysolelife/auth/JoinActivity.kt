@@ -69,6 +69,8 @@ class JoinActivity : AppCompatActivity() {
 
                             Toast.makeText(this, "성공", Toast.LENGTH_LONG).show()
                             var intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            startActivity(intent)
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
                             Toast.makeText(this, "실패", Toast.LENGTH_LONG).show()
