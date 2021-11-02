@@ -32,9 +32,9 @@ class JoinActivity : AppCompatActivity() {
 
             var isGoToJoin = true
 
-            var email = binding.textEmail.text.toString()
-            var pass1 = binding.textPassword1.text.toString()
-            var pass2 = binding.textPassword2.text.toString()
+            val email = binding.textEmail.text.toString()
+            val pass1 = binding.textPassword1.text.toString()
+            val pass2 = binding.textPassword2.text.toString()
 
             if (email.isEmpty()) {
                 Toast.makeText(this, "이메일을 입력해주세요", Toast.LENGTH_LONG).show()
@@ -66,15 +66,14 @@ class JoinActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             Log.d(TAG, "createUserWithEmail:success")
-
                             Toast.makeText(this, "성공", Toast.LENGTH_LONG).show()
-                            var intent = Intent(this, MainActivity::class.java)
+
+                            val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                             startActivity(intent)
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
                             Toast.makeText(this, "실패", Toast.LENGTH_LONG).show()
-
                         }
                     }
             }
