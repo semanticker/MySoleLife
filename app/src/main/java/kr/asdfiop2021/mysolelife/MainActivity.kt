@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        auth = Firebase.auth
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        auth = Firebase.auth
-
+/*
         findViewById<Button>(R.id.btnLogout).setOnClickListener {
 
             auth.signOut()
@@ -27,5 +27,7 @@ class MainActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
+*/
+
     }
 }
