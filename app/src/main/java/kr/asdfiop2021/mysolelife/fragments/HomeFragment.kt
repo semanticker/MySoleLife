@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import kr.asdfiop2021.mysolelife.R
 import kr.asdfiop2021.mysolelife.databinding.FragmentHomeBinding
 
@@ -50,7 +51,9 @@ class HomeFragment : Fragment() {
 
         binding.tabTip.setOnClickListener{
             Log.d("HomeFragment", "tabTip")
-            Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+            it.findNavController().navigate(R.id.action_homeFragment_to_tipFragment)
+
         }
 
         // Inflate the layout for this fragment
