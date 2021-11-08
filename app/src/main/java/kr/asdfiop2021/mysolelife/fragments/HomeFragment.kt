@@ -51,9 +51,19 @@ class HomeFragment : Fragment() {
 
         binding.tabTip.setOnClickListener{
             Log.d("HomeFragment", "tabTip")
-            //Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
             it.findNavController().navigate(R.id.action_homeFragment_to_tipFragment)
+        }
 
+        binding.tabTalk.setOnClickListener{
+            it.findNavController().navigate(R.id.action_homeFragment_to_talkFragment)
+        }
+
+        binding.tabBookmark.setOnClickListener{
+            it.findNavController().navigate(R.id.action_homeFragment_to_bookmarkFragment)
+        }
+
+        binding.tabStore.setOnClickListener{
+            it.findNavController().navigate(R.id.action_homeFragment_to_storeFragment)
         }
 
         // Inflate the layout for this fragment
