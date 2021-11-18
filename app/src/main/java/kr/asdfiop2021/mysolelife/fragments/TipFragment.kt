@@ -1,5 +1,6 @@
 package kr.asdfiop2021.mysolelife.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import kr.asdfiop2021.mysolelife.R
+import kr.asdfiop2021.mysolelife.contentsList.ContentsListActivity
 import kr.asdfiop2021.mysolelife.databinding.FragmentTipBinding
 
 /**
@@ -30,6 +32,11 @@ class TipFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tip, container, false)
+
+        binding.category1.setOnClickListener {
+            val intent = Intent(context, ContentsListActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.tabHome.setOnClickListener {
             Log.d("TipFragment", "tabHome")
