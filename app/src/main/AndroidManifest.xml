@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MySoleLife"
         android:usesCleartextTraffic="true">
-        <activity android:name=".contentsList.ContentsListActivity"></activity>
+        <activity android:name=".contentsList.ContentListActivity"></activity>
         <activity android:name=".auth.JoinActivity" />
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".auth.IntroActivity" />

@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import kr.asdfiop2021.mysolelife.R
-import kr.asdfiop2021.mysolelife.contentsList.ContentsListActivity
+import kr.asdfiop2021.mysolelife.contentsList.ContentListActivity
 import kr.asdfiop2021.mysolelife.databinding.FragmentTipBinding
 
 /**
@@ -34,7 +34,7 @@ class TipFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tip, container, false)
 
         binding.category1.setOnClickListener {
-            val intent = Intent(context, ContentsListActivity::class.java)
+            val intent = Intent(context, ContentListActivity::class.java)
             startActivity(intent)
         }
 
