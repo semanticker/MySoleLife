@@ -11,12 +11,25 @@ import com.bumptech.glide.Glide
 import kr.asdfiop2021.mysolelife.R
 
 class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>) : RecyclerView.Adapter<ContentRVAdapter.ViewHolder>(){
+
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick : ItemClick? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentRVAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.content_rv_item, parent, false)
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: ContentRVAdapter.ViewHolder, position: Int) {
+
+        if (itemClick != null) {
+            holder.itemView.setOnClickListener { v->
+                itemClick?.onClick(v, position)
+            }
+        }
         holder.bindItems(items[position])
     }
 
