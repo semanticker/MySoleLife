@@ -72,6 +72,7 @@ class ContentListActivity : AppCompatActivity() {
 
         rv.layoutManager = GridLayoutManager(this, 2)
 
+        /* // 버튼 작동이 안되게 수정
         rvAdapter.itemClick = object : ContentRVAdapter.ItemClick {
             override fun onClick(view: View, position: Int){
                 Toast.makeText(baseContext, items[position].title, Toast.LENGTH_LONG).show()
@@ -81,6 +82,8 @@ class ContentListActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+        */
+
 
         /*
         val myRef2 = database.getReference("contents2")
