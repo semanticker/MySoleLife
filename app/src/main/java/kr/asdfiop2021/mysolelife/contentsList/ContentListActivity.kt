@@ -25,7 +25,8 @@ class ContentListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contents_list)
 
         val items = ArrayList<ContentModel>()
-        val rvAdapter = ContentRVAdapter(baseContext, items);
+        val itemKeyList = ArrayList<String>()
+        val rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList);
 
         val database = Firebase.database
 
@@ -41,15 +42,15 @@ class ContentListActivity : AppCompatActivity() {
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                //val post = dataSnapshot.getValue<Post>()
-                // ...
+
                 Log.d("ContentListActivity", dataSnapshot.toString())
 
                 for (dataModel in dataSnapshot.children) {
                     Log.d("ContentListActivity", dataModel.toString())
+                    Log.d("ContentListActivity", dataModel.key.toString())
                     val item = dataModel.getValue(ContentModel::class.java)
                     items.add(item!!)
+                    itemKeyList.add(dataModel.key.toString())
                 }
 
                 rvAdapter.notifyDataSetChanged()

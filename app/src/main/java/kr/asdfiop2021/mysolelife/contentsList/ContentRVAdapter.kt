@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.asdfiop2021.mysolelife.R
 
-class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>) : RecyclerView.Adapter<ContentRVAdapter.ViewHolder>(){
+class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>, val keyList:ArrayList<String>) : RecyclerView.Adapter<ContentRVAdapter.ViewHolder>(){
 
     /*  // 동작이 안되게 수정
     interface ItemClick {
