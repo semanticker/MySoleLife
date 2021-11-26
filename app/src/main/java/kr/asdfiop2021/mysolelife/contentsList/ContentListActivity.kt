@@ -18,9 +18,11 @@ import kr.asdfiop2021.mysolelife.R
 
 class ContentListActivity : AppCompatActivity() {
 
+    lateinit var myRef : DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contents_list)
 
@@ -31,8 +33,6 @@ class ContentListActivity : AppCompatActivity() {
         val database = Firebase.database
 
         val category = intent.getStringExtra("category").toString();
-
-        lateinit var myRef : DatabaseReference
 
         if (category == "category1") {
             myRef = database.getReference("contents")

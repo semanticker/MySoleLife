@@ -2,6 +2,7 @@ package kr.asdfiop2021.mysolelife.contentsList
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.asdfiop2021.mysolelife.R
+import kr.asdfiop2021.mysolelife.utils.FBAuth
+import kr.asdfiop2021.mysolelife.utils.FBRef
 
 class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>, val keyList:ArrayList<String>) : RecyclerView.Adapter<ContentRVAdapter.ViewHolder>(){
 
@@ -35,7 +38,7 @@ class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>,
             }
         }
          */
-        holder.bindItems(items[position])
+        holder.bindItems(items[position], keyList[position])
     }
 
     override fun getItemCount(): Int {
@@ -44,7 +47,7 @@ class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>,
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(item: ContentModel) {
+        fun bindItems(item: ContentModel, key : String) {
 
             itemView.setOnClickListener {
                 Toast.makeText(context, item.title, Toast.LENGTH_LONG).show()
@@ -63,8 +66,12 @@ class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>,
                 .into(imageViewArea)
 
             val bookmarkArea = itemView.findViewById<ImageView>(R.id.bookmarkArea)
+
             bookmarkArea.setOnClickListener {
-                Toast.makeText(context, "북마크가 클릭되었습니다.", Toast.LENGTH_LONG).show()
+                Log.d("ContentRVAdapter", FBAuth.getUid())
+                Toast.makeText(context, key, Toast.LENGTH_LONG).show()
+
+                FBRef.bookmarkRef.child(FBAuth.getUid()).child(key).setValue("Good")
             }
 
 
