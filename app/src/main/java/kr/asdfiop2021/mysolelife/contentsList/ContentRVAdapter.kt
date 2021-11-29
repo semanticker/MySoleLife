@@ -15,7 +15,10 @@ import kr.asdfiop2021.mysolelife.R
 import kr.asdfiop2021.mysolelife.utils.FBAuth
 import kr.asdfiop2021.mysolelife.utils.FBRef
 
-class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>, val keyList:ArrayList<String>) : RecyclerView.Adapter<ContentRVAdapter.ViewHolder>(){
+class ContentRVAdapter(val context : Context,
+                       val items:ArrayList<ContentModel>,
+                       val keyList:ArrayList<String>,
+                       val bookmarkIdList : MutableList<String>) : RecyclerView.Adapter<ContentRVAdapter.ViewHolder>(){
 
     /*  // 동작이 안되게 수정
     interface ItemClick {
@@ -26,6 +29,8 @@ class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentRVAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.content_rv_item, parent, false)
+        Log.d("ContentRVAdapter", keyList.toString())
+        Log.d("ContentRVAdapter", bookmarkIdList.toString())
         return ViewHolder(v)
     }
 
@@ -38,7 +43,7 @@ class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>,
             }
         }
          */
-        holder.bindItems(items[position], keyList[position])
+        holder.bindItems(items[position], keyList[position], bookmarkIdList[position])
     }
 
     override fun getItemCount(): Int {
@@ -47,7 +52,7 @@ class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>,
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(item: ContentModel, key : String) {
+        fun bindItems(item: ContentModel, key : String, bookmark : String) {
 
             itemView.setOnClickListener {
                 Toast.makeText(context, item.title, Toast.LENGTH_LONG).show()
@@ -67,16 +72,23 @@ class ContentRVAdapter(val context : Context, val items:ArrayList<ContentModel>,
 
             val bookmarkArea = itemView.findViewById<ImageView>(R.id.bookmarkArea)
 
+            if (keyList.contains(bookmark)) {
+                bookmarkArea.setImageResource(R.drawable.bookmark_color)
+            } else {
+                bookmarkArea.setImageResource(R.drawable.bookmark_white)
+            }
+
             bookmarkArea.setOnClickListener {
                 Log.d("ContentRVAdapter", FBAuth.getUid())
                 Toast.makeText(context, key, Toast.LENGTH_LONG).show()
 
-                FBRef.bookmarkRef.child(FBAuth.getUid()).child(key).setValue("Good")
+                ///FBRef.bookmarkRef.child(FBAuth.getUid()).child(key).setValue("Good")
+                FBRef.bookmarkRef
+                    .child(FBAuth.getUid())
+                    .child(key)
+                    .setValue(BookmarkModel(true))
             }
-
-
         }
-
     }
 
 
