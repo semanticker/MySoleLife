@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kr.asdfiop2021.mysolelife.R
+import kr.asdfiop2021.mysolelife.utils.FBRef
 
 class ContentListActivity : AppCompatActivity() {
 
@@ -66,12 +67,13 @@ class ContentListActivity : AppCompatActivity() {
 
         myRef.addValueEventListener(postListener)
 
-
         val rv : RecyclerView = findViewById(R.id.recyclerView)
 
         rv.adapter = rvAdapter
 
         rv.layoutManager = GridLayoutManager(this, 2)
+
+        getBookmarkData();
 
         /* // 버튼 작동이 안되게 수정
         rvAdapter.itemClick = object : ContentRVAdapter.ItemClick {
@@ -163,6 +165,33 @@ class ContentListActivity : AppCompatActivity() {
         //items.add(ContentModel("title13","https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdIKDG%2Fbtq64M96JFa%2FKcJiYgKuwKuP3fIyviXm90%2Fimg.png", "https://philosopher-chan.tistory.com/1247?category=941578"))
         //items.add(ContentModel("title14","https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FFtY3t%2Fbtq65q6P4Zr%2FWe64GM8KzHAlGE3xQ2nDjk%2Fimg.png", "https://philosopher-chan.tistory.com/1248?category=941578"))
         //items.add(ContentModel("title15","https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FOtaMq%2Fbtq67OMpk4W%2FH1cd0mda3n2wNWgVL9Dqy0%2Fimg.png", "https://philosopher-chan.tistory.com/1249?category=941578"))
+
+    }
+
+    private fun getBookmarkData(){
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                Log.d("ContentListActivity", dataSnapshot.toString())
+
+                for (dataModel in dataSnapshot.children) {
+
+                    Log.d("getBookmarkData", dataModel.key.toString())
+                    Log.d("getBookmarkData", dataModel.toString())
+
+                }
+
+
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+
+        FBRef.bookmarkRef.addValueEventListener(postListener)
 
     }
 }
