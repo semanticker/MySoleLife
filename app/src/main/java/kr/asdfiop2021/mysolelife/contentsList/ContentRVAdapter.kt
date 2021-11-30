@@ -43,7 +43,7 @@ class ContentRVAdapter(val context : Context,
             }
         }
          */
-        holder.bindItems(items[position], keyList[position], bookmarkIdList[position])
+        holder.bindItems(items[position], keyList[position])
     }
 
     override fun getItemCount(): Int {
@@ -52,7 +52,7 @@ class ContentRVAdapter(val context : Context,
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(item: ContentModel, key : String, bookmark : String) {
+        fun bindItems(item: ContentModel, key : String) {
 
             itemView.setOnClickListener {
                 Toast.makeText(context, item.title, Toast.LENGTH_LONG).show()
@@ -72,7 +72,7 @@ class ContentRVAdapter(val context : Context,
 
             val bookmarkArea = itemView.findViewById<ImageView>(R.id.bookmarkArea)
 
-            if (keyList.contains(bookmark)) {
+            if (bookmarkIdList.contains(key)) {
                 bookmarkArea.setImageResource(R.drawable.bookmark_color)
             } else {
                 bookmarkArea.setImageResource(R.drawable.bookmark_white)
