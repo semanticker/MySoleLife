@@ -82,11 +82,29 @@ class ContentRVAdapter(val context : Context,
                 Log.d("ContentRVAdapter", FBAuth.getUid())
                 Toast.makeText(context, key, Toast.LENGTH_LONG).show()
 
+                // 북마크가 등록되어 있는 경우 삭제함
+                if (bookmarkIdList.contains(key)) {
+
+                    // 북마크 아이콘을 빈곳으로 만듦
+                    bookmarkIdList.remove(key)
+
+                    FBRef.bookmarkRef
+                       .child(FBAuth.getUid())
+                       .child(key)
+                       .removeValue()
+                } else {
+                    // 북마크에 등록이 되어 있지 않은 경우
+                    FBRef.bookmarkRef
+                        .child(FBAuth.getUid())
+                        .child(key)
+                        .setValue(BookmarkModel(true))
+                }
+
                 ///FBRef.bookmarkRef.child(FBAuth.getUid()).child(key).setValue("Good")
-                FBRef.bookmarkRef
-                    .child(FBAuth.getUid())
-                    .child(key)
-                    .setValue(BookmarkModel(true))
+
+
+
+
             }
         }
     }
