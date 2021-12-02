@@ -176,6 +176,8 @@ class ContentListActivity : AppCompatActivity() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+                //bookmarkIdList.clear();
+
                 Log.d("ContentListActivity", dataSnapshot.toString())
 
                 for (dataModel in dataSnapshot.children) {
