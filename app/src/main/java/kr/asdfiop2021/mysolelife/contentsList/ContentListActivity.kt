@@ -176,7 +176,7 @@ class ContentListActivity : AppCompatActivity() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                //bookmarkIdList.clear();
+                bookmarkIdList.clear();
 
                 Log.d("ContentListActivity", dataSnapshot.toString())
 
