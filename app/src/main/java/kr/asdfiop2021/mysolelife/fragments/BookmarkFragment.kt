@@ -47,8 +47,6 @@ class BookmarkFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
 
-        // 1. 전체 카테고에 있는 컨텐츠 데이터들을 다 가져옴
-        getCategoryData()
         /*if (category == "category1") {
             myRef = database.getReference("contents")
         } else if (category == "category2") {
@@ -97,8 +95,12 @@ class BookmarkFragment : Fragment() {
                     Log.d(TAG, dataModel.toString())
 
                     val item = dataModel.getValue(ContentModel::class.java)
-                    items.add(item!!)
-                    itemKeyList.add(dataModel.key.toString())
+
+                    if (bookmarkIdList.contains(dataModel.key.toString())) {
+                        items.add(item!!)
+                        itemKeyList.add(dataModel.key.toString())
+                    }
+
                 }
                 rvAdapter.notifyDataSetChanged()
             }
@@ -123,6 +125,9 @@ class BookmarkFragment : Fragment() {
                     Log.e(TAG, dataModel.toString())
                     bookmarkIdList.add(dataModel.key.toString())
                 }
+
+                // 1. 전체 카테고에 있는 컨텐츠 데이터들을 다 가져옴
+                getCategoryData()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
