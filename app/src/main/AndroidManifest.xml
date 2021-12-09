@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MySoleLife"
         android:usesCleartextTraffic="true">
-        <activity android:name=".contentsList.ContentShowActivity"></activity>
+        <activity android:name=".board.BoardWriteActivity"></activity>
+        <activity android:name=".contentsList.ContentShowActivity" />
         <activity android:name=".contentsList.ContentListActivity" />
         <activity android:name=".auth.JoinActivity" />
         <activity android:name=".auth.LoginActivity" />
