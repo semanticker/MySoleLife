@@ -15,5 +15,8 @@ class FBRef {
         val category1 = database.getReference("contents")
         val category2 = database.getReference("contents2")
 
+        // 게시판 Ref
+        val boardRef = database.getReference("board")
+
     }
 }
