@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kr.asdfiop2021.mysolelife.R
+import kr.asdfiop2021.mysolelife.board.BoardInsideActivity
 import kr.asdfiop2021.mysolelife.board.BoardListVAdapter
 import kr.asdfiop2021.mysolelife.board.BoardModel
 import kr.asdfiop2021.mysolelife.board.BoardWriteActivity
@@ -46,11 +47,23 @@ class TalkFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk, container, false)
 
-        //val boardList = mutableListOf<BoardModel>()
-        //boardList.add(BoardModel("a", "B", "c", "d"))
-
         boardRVAdater = BoardListVAdapter(boardDataList)
         binding.listViewBoard.adapter = boardRVAdater
+
+        binding.listViewBoard.setOnItemClickListener { adapterView, view, position, id ->
+
+            val intent = Intent(context, BoardInsideActivity::class.java)
+            intent.putExtra("title", boardDataList[position].title)
+            intent.putExtra("content", boardDataList[position].content)
+            intent.putExtra("time", boardDataList[position].time)
+            startActivity(intent)
+
+        }
+        // 첫번째 방법으로 listview에 있는 title content time 다 다른 액티비티로 전달해줘서 만들기
+
+        // 두번째 방법으로는 Firebase에 있는 board에 대한 데이터의 id를 기반으로 다시 데이터를 받아오는 방법
+
+
 
         binding.btnWrite.setOnClickListener {
             val intent = Intent(context, BoardWriteActivity::class.java)

@@ -30,7 +30,9 @@ class BoardWriteActivity : AppCompatActivity() {
             var time = FBAuth.getTime()
 
             Log.d(TAG, title);
-            Log.d(TAG, title);
+            Log.d(TAG, content);
+            Log.d(TAG, uid);
+            Log.d(TAG, time);
 
             // 북마크에 등록이 되어 있지 않은 경우
             /*
