@@ -47,6 +47,11 @@
         android:background="@drawable/backgound_radius"
         android:padding="10dp" />
 
+        <ImageView
+            android:id="@+id/imageDownload"
+            android:layout_margin="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
 
 </LinearLayout>
 </layout>
