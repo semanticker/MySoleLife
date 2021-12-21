@@ -3,8 +3,11 @@ package kr.asdfiop2021.mysolelife.board
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
@@ -39,6 +42,9 @@ class BoardInsideActivity : AppCompatActivity() {
         binding.textTime.text = time
         binding.textContent.text = content
         */
+        binding.imageBoardMenu.setOnClickListener {
+            showDialog()
+        }
 
         // 두번째 방법
         val key = intent.getStringExtra("key")
@@ -46,6 +52,23 @@ class BoardInsideActivity : AppCompatActivity() {
 
         getImageData(key.toString())
 
+
+    }
+
+    private fun showDialog(){
+
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("게시글 수정/삭제")
+
+        val alertDialog = mBuilder.show()
+        alertDialog.findViewById<Button>(R.id.btnEdit)?.setOnClickListener {
+            Toast.makeText(this, "수정", Toast.LENGTH_LONG).show()
+        }
+        alertDialog.findViewById<Button>(R.id.btnDelete)?.setOnClickListener {
+            Toast.makeText(this, "삭제", Toast.LENGTH_LONG).show()
+        }
 
     }
 
