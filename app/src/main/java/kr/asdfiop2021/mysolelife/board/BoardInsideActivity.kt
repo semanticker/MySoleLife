@@ -26,6 +26,8 @@ class BoardInsideActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityBoardInsideBinding
 
+    private lateinit var key:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
@@ -47,10 +49,10 @@ class BoardInsideActivity : AppCompatActivity() {
         }
 
         // 두번째 방법
-        val key = intent.getStringExtra("key")
-        getBoardData(key.toString())
+        key = intent.getStringExtra("key").toString()
+        getBoardData(key)
 
-        getImageData(key.toString())
+        getImageData(key)
 
 
     }
@@ -64,10 +66,13 @@ class BoardInsideActivity : AppCompatActivity() {
 
         val alertDialog = mBuilder.show()
         alertDialog.findViewById<Button>(R.id.btnEdit)?.setOnClickListener {
+
             Toast.makeText(this, "수정", Toast.LENGTH_LONG).show()
         }
         alertDialog.findViewById<Button>(R.id.btnDelete)?.setOnClickListener {
+            FBRef.boardRef.child(key).removeValue()
             Toast.makeText(this, "삭제", Toast.LENGTH_LONG).show()
+            alertDialog.dismiss()
         }
 
     }
@@ -104,14 +109,16 @@ class BoardInsideActivity : AppCompatActivity() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                Log.d(TAG, dataSnapshot.toString())
-                val dataModel = dataSnapshot.getValue(BoardModel::class.java)
-                Log.d(TAG, dataModel!!.title)
+                // 데이터를 삭제한 경우는 getValue() 결과가 null 이다.
+                if (dataSnapshot.getValue() != null) {
+                    Log.d(TAG, dataSnapshot.toString())
+                    val dataModel = dataSnapshot.getValue(BoardModel::class.java)
+                    Log.d(TAG, dataModel!!.title)
 
-                binding.textTitle.text = dataModel!!.title
-                binding.textContent.text = dataModel!!.content
-                binding.textTime.text = dataModel!!.time
-
+                    binding.textTitle.text = dataModel!!.title
+                    binding.textContent.text = dataModel!!.content
+                    binding.textTime.text = dataModel!!.time
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
