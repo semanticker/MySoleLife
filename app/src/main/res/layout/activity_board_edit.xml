@@ -75,10 +75,10 @@
                     android:layout_height="wrap_content" />
 
                 <Button
-                    android:id="@+id/btnWrite"
+                    android:id="@+id/btnEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="입력"
+                    android:text="수정"
                     android:background="@drawable/background_radius_yellow"
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="20dp"

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
@@ -15,6 +16,7 @@ import com.google.firebase.storage.ktx.storage
 import kr.asdfiop2021.mysolelife.R
 import kr.asdfiop2021.mysolelife.databinding.ActivityBoardEditBinding
 import kr.asdfiop2021.mysolelife.databinding.ActivityBoardInsideBinding
+import kr.asdfiop2021.mysolelife.utils.FBAuth
 import kr.asdfiop2021.mysolelife.utils.FBRef
 
 class BoardEditActivity : AppCompatActivity() {
@@ -24,6 +26,8 @@ class BoardEditActivity : AppCompatActivity() {
     private lateinit var binding : ActivityBoardEditBinding
 
     private val TAG = BoardEditActivity::class.java.simpleName
+
+    private lateinit var writerUid : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +39,26 @@ class BoardEditActivity : AppCompatActivity() {
         getBoardData(key)
 
         getImageData(key)
+
+        binding.btnEdit.setOnClickListener {
+            editBoardData(key)
+        }
+
+    }
+
+    private fun editBoardData(key: String) {
+
+        val title = binding.textTitle.text.toString();
+        val content = binding.textContent.text.toString();
+        val time = FBAuth.getTime()
+
+        FBRef.boardRef
+            //.push()
+            .child(key)
+            .setValue(BoardModel(title, content, writerUid, time))
+
+        Toast.makeText(this, "수정완료", Toast.LENGTH_LONG).show()
+        finish()
 
     }
 
@@ -78,6 +102,7 @@ class BoardEditActivity : AppCompatActivity() {
 
                     binding.textTitle.setText(dataModel!!.title)
                     binding.textContent.setText(dataModel!!.content)
+                    writerUid = dataModel!!.uid
                 }
             }
 
