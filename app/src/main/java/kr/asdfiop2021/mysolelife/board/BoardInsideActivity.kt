@@ -19,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kr.asdfiop2021.mysolelife.R
 import kr.asdfiop2021.mysolelife.databinding.ActivityBoardInsideBinding
+import kr.asdfiop2021.mysolelife.utils.FBAuth
 import kr.asdfiop2021.mysolelife.utils.FBRef
 
 class BoardInsideActivity : AppCompatActivity() {
@@ -124,6 +125,15 @@ class BoardInsideActivity : AppCompatActivity() {
                     binding.textTitle.text = dataModel!!.title
                     binding.textContent.text = dataModel!!.content
                     binding.textTime.text = dataModel!!.time
+
+                    val myUid = FBAuth.getUid()
+                    val writerUid = dataModel.uid
+
+                    if (myUid.equals(writerUid)) {
+                        Toast.makeText(baseContext, "내글", Toast.LENGTH_LONG)
+                    } else {
+                        Toast.makeText(baseContext, "내글 아님", Toast.LENGTH_LONG)
+                    }
                 }
             }
 

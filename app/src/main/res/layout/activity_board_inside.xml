@@ -29,6 +29,7 @@
 
             <ImageView
                 android:id="@+id/imageBoardMenu"
+                android:visibility="invisible"
                 android:layout_width="20dp"
                 android:layout_height="40dp"
                 android:src="@drawable/main_menu"
