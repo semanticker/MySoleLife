@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
@@ -131,8 +132,10 @@ class BoardInsideActivity : AppCompatActivity() {
 
                     if (myUid.equals(writerUid)) {
                         Toast.makeText(baseContext, "내글", Toast.LENGTH_LONG)
+                        binding.imageBoardMenu.isVisible = true
                     } else {
                         Toast.makeText(baseContext, "내글 아님", Toast.LENGTH_LONG)
+                        binding.imageBoardMenu.isVisible = false
                     }
                 }
             }
