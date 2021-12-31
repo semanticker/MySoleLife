@@ -26,9 +26,11 @@ class BoardListVAdapter (val boardList : MutableList<BoardModel>) : BaseAdapter(
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
 
-        if (view == null) {
+        // 리스트에서 사용자가 작성한 글에 대해서만 색상이 변경되어야 하는데
+        // 랜덤하게 적용이 되어서 문제가 있음
+        //if (view == null) {
             view = LayoutInflater.from(parent?.context).inflate(R.layout.board_list_item, parent,false)
-        }
+        //}
 
         val itemLinearLayoutView = view?.findViewById<LinearLayout>(R.id.itemView)
 
