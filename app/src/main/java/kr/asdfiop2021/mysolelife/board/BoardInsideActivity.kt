@@ -108,7 +108,7 @@ class BoardInsideActivity : AppCompatActivity() {
                     .load(task.result)
                     .into(imageViewFromFB)
             } else {
-
+                binding.imageDownload.isVisible = false
             }
         })
     }
