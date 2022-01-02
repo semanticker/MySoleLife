@@ -18,5 +18,8 @@ class FBRef {
         // 게시판 Ref
         val boardRef = database.getReference("board")
 
+        // 댓글 Ref
+        val commentRef = database.getReference("comment")
+
     }
 }

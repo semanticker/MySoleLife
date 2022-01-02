@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kr.asdfiop2021.mysolelife.R
+import kr.asdfiop2021.mysolelife.comment.CommentModel
 import kr.asdfiop2021.mysolelife.databinding.ActivityBoardInsideBinding
 import kr.asdfiop2021.mysolelife.utils.FBAuth
 import kr.asdfiop2021.mysolelife.utils.FBRef
@@ -57,6 +58,28 @@ class BoardInsideActivity : AppCompatActivity() {
 
         getImageData(key)
 
+        // comment 버튼 누를때
+        binding.imageComment.setOnClickListener{
+            insertComment(key);
+        }
+
+
+    }
+
+    private fun insertComment(key : String) {
+        //TODO("Not yet implemented")
+        // comment
+        //  - BoardKey
+        //      - CommentKey
+        //          - CommentData
+
+        FBRef.commentRef
+            .child(key)
+            .push()
+            .setValue(CommentModel(binding.textComment.text.toString()))
+
+        Toast.makeText(this, "댓글 입력 완료", Toast.LENGTH_LONG).show()
+        binding.textComment.setText("")
 
     }
 
