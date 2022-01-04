@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import kr.asdfiop2021.mysolelife.R
@@ -47,6 +48,12 @@ class StoreFragment : Fragment() {
             it.findNavController().navigate(R.id.action_storeFragment_to_bookmarkFragment)
         }
 
-        return binding.root
+
+        val view = inflater.inflate(R.layout.fragment_store, container, false)
+
+        val webView : WebView = view.findViewById(R.id.storeWebView)
+        webView.loadUrl("https://www.inflearn.com/")
+
+        return view
     }
 }
